@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import logic
 
-
-dataframe = pd.DataFrame({
-    "Names": [],
-    "Grades": []
-})
+if "Roster" not in st.session_state:
+    st.session_state["Roster"] = pd.DataFrame({
+        "Names": [],
+        "Grades": []
+    })
 
 
 def sidebar():
@@ -15,7 +15,7 @@ def sidebar():
     grade = st.sidebar.number_input("Score", min_value= 0, max_value= 100)
     
     if st.sidebar.button("Add Student") and name and grade:
-        dataframe.loc[len(dataframe)] = (name, grade)
+        st.session_state["Roster"].loc[len(st.session_state["Roster"])] = (name, grade)
 
 
 if __name__ == "__main__":
