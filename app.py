@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import logic
 
 if "Roster" not in st.session_state:
     st.session_state["Roster"] = pd.DataFrame({
@@ -19,3 +20,6 @@ def sidebar():
 
 if __name__ == "__main__":
     sidebar()
+    st.markdown("## Grade Distribution")
+    st.bar_chart(logic.get_grade_distribution(st.session_state["Roster"]))
+    print(st.session_state["Roster"])
