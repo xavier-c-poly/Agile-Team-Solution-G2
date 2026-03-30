@@ -9,15 +9,6 @@ if "Roster" not in st.session_state:
     })
 
 
-st.title("Faculty Grade Dashboard")
-col1, col2, col3 = st.columns(3)
-average, highest, lowest = logic.calculate_stats(st.session_state["Roster"])
-
-col1.metric("Average", f"{average:.1f}")
-col2.metric("Highest", highest)
-col3.metric("Lowest", lowest)
-
-
 def sidebar():
     st.sidebar.header("Entry Form")
     name = st.sidebar.text_input("Student Name")
@@ -25,10 +16,25 @@ def sidebar():
     
     if st.sidebar.button("Add Student") and name and grade:
         st.session_state["Roster"].loc[len(st.session_state["Roster"])] = (name, grade)
+sidebar()
 
 
-if __name__ == "__main__":
-    sidebar()
+st.title("Faculty Grade Dashboard")
+#col1, col2, col3 = (0.0, 0, 0)
+average, highest, lowest = (0.0, 0, 0)
+
+if not st.session_state["Roster"].empty:
+    average, highest, lowest = logic.calculate_stats(st.session_state["Roster"])    
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Average", f"{average:.1f}")
+col2.metric("Highest", highest)
+col3.metric("Lowest", lowest)
+
+
+#if __name__ == "__main__":
+    #sidebar()
+
+if not st.session_state["Roster"].empty:
     st.markdown("## Grade Distribution")
     st.bar_chart(logic.get_grade_distribution(st.session_state["Roster"]))
-    print(st.session_state["Roster"])
