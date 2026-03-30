@@ -21,5 +21,5 @@ def sidebar():
 if __name__ == "__main__":
     sidebar()
     st.markdown("## Grade Distribution")
-    st.bar_chart(logic.get_grade_distribution(dataframe))
-    print(dataframe)
+    st.bar_chart(logic.get_grade_distribution(st.session_state["Roster"]))
+    print(st.session_state["Roster"])
