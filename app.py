@@ -1,26 +1,25 @@
 import streamlit as st
+import pandas as pd
+import logic
 
-# Use st.bar_chart to display the distribution data
-# provided by the logic module
 
-st.markdown("# Faculty Grade Dashboard")
-
-average = 3
-lowest = 1
-highest = 5
-
-st.markdown(f"#### Average: {average}")
-st.markdown(f"#### Highest: {highest}")
-st.markdown(f"#### Lowest: {lowest}")
-
-st.markdown("## Grade Distribution")
-st.bar_chart({
-    'A': 2,
-    'B': 0,
-    'C': 1,
-    'D': 1,
-    'F': 1
+dataframe = pd.DataFrame({
+    "Names": [],
+    "Grades": []
 })
 
-st.markdown("## Current Roster")
-st.dataframe("Jordan's dataframe goes here")
+
+def sidebar():
+    st.sidebar.header("Entry Form")
+    name = st.sidebar.text_input("Student Name")
+    grade = st.sidebar.number_input("Score", min_value= 0, max_value= 100)
+    
+    if st.sidebar.button("Add Student") and name and grade:
+        dataframe.loc[len(dataframe)] = (name, grade)
+
+
+if __name__ == "__main__":
+    sidebar()
+    st.markdown("## Grade Distribution")
+    st.bar_chart(logic.get_grade_distribution(dataframe))
+    print(dataframe)
