@@ -14,6 +14,8 @@ def sidebar():
     grade = st.sidebar.number_input("Score", min_value= 0, max_value= 100)
     
     if st.sidebar.button("Add Student") and name and grade:
-        dataframe.append(pd.DataFrame({"Names": [name], "Grades": [grade]}))
+        dataframe.loc[len(dataframe)] = (name, grade)
 
-sidebar()
+
+if __name__ == "__main__":
+    sidebar()
