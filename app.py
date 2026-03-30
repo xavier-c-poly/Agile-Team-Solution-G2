@@ -17,6 +17,5 @@ def sidebar():
         st.session_state["Roster"].loc[len(st.session_state["Roster"])] = (name, grade)
 
 
-sidebar()
-print("B:")
-st.dataframe(st.session_state["Roster"])
+if __name__ == "__main__":
+    sidebar()
