@@ -20,7 +20,6 @@ sidebar()
 
 
 st.title("Faculty Grade Dashboard")
-#col1, col2, col3 = (0.0, 0, 0)
 average, highest, lowest = (0.0, 0, 0)
 
 if not st.session_state["Roster"].empty:
@@ -31,9 +30,6 @@ col1.metric("Average", f"{average:.1f}")
 col2.metric("Highest", highest)
 col3.metric("Lowest", lowest)
 
-
-#if __name__ == "__main__":
-    #sidebar()
 
 if not st.session_state["Roster"].empty:
     st.markdown("## Grade Distribution")
