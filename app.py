@@ -9,6 +9,15 @@ if "Roster" not in st.session_state:
     })
 
 
+st.title("Faculty Grade Dashboard")
+col1, col2, col3 = st.columns(3)
+average, highest, lowest = logic.calculate_stats(st.session_state["Roster"])
+
+col1.metric("Average", f"{average:.1f}")
+col2.metric("Highest", highest)
+col3.metric("Lowest", lowest)
+
+
 def sidebar():
     st.sidebar.header("Entry Form")
     name = st.sidebar.text_input("Student Name")
